@@ -27,7 +27,6 @@ class mahasiswa {
                     let query = `SELECT * FROM user WHERE nama_user = ?`
 
                     db.get(query, [username], (err, rows) => {
-console.log(rows)
                         if (err) {
                             throw err
                         }
@@ -37,7 +36,6 @@ console.log(rows)
                         } else if (rows.pasword === Number(trimedpass)) {
                             that.nama = username
                             that.level = rows
-                            console.log('yeay')
                             that.mainmenu()
                         } else {
                             console.log("pasword yang anda masukkan salah")
@@ -486,7 +484,6 @@ console.log(rows)
         let that = this
         if (that.access === 'mahasiswa'){
             console.log('=====================================================================')
-            console.log('woi')
             rl.question('masukan nim mahasiswa yang akan dihapus:', (answer) =>{
                 db.serialize(function(){
                     let sql = 'DELETE FROM mahasiswa WHERE nim = ?'
@@ -494,16 +491,16 @@ console.log(rows)
                         if(!err){
                             console.log(`mahasiswa dengan nim ${answer} telah di hapus`)
                         }else if (err){
+                            console.log(`mahasiswa denan nim.${answer} tidak ditemukan`)
                             throw err
                         }
+                        that.getAll()
                     })
-                    that.getAll()
                 })
             })
         }
         if (that.access === 'jurusan'){
             console.log('=====================================================================')
-            console.log('woi')
             rl.question('masukan id jurusan yang akan dihapus:', (answer) =>{
                 db.serialize(function(){
                     let sql = 'DELETE FROM jurusan WHERE id_jurusan = ?'
@@ -520,7 +517,6 @@ console.log(rows)
         }
         if (that.access === 'dosen'){
             console.log('=====================================================================')
-            console.log('woi')
             rl.question('masukan id dosen yang akan dihapus:', (answer) =>{
                 db.serialize(function(){
                     let sql = 'DELETE FROM dosen WHERE id_dosen = ?'
@@ -537,7 +533,6 @@ console.log(rows)
         }
         if (that.access === 'matakuliah'){
             console.log('=====================================================================')
-            console.log('woi')
             rl.question('masukan id matakuliah yang akan dihapus:', (answer) =>{
                 db.serialize(function(){
                     let sql = 'DELETE FROM matakuliah WHERE id_mk = ?'
@@ -554,7 +549,6 @@ console.log(rows)
         }
         if (that.access === 'kontrak'){
             console.log('=====================================================================')
-            console.log('woi')
             rl.question('masukan id kontrak yang akan dihapus:', (answer) =>{
                 db.serialize(function(){
                     let sql = 'DELETE FROM krs WHERE no_krs = ?'
